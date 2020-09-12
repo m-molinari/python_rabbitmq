@@ -31,15 +31,16 @@ optional arguments:
                         body of message (need quotes if there are spaces), ex : "hello world"
   -q QUEUE, --queue QUEUE
                         Name of RabbitMQ queue ex: QUEUE01
-  -t TYPE, --type TYPE  Queue Type classic/quorum
+  -t TYPE, --type TYPE  Queue Type: classic/quorum
   -d DURABLE, --durable DURABLE
-                        queue durable or not
+                        Queue durable: true/false
+
 
 ```
 ### Consumer
 
 ```bash
-usage: consumer.py [-h] -r RABBITHOST -q QUEUE [-t TYPE] [-d DURABLE]
+uusage: consumer.py [-h] -r RABBITHOST -q QUEUE [-t TYPE] [-d DURABLE]
 
 RabbitMQ Arguments
 
@@ -49,10 +50,9 @@ optional arguments:
                         RabbitMQ host ex: 127.0.0.1
   -q QUEUE, --queue QUEUE
                         Name of RabbitMQ queue ex: QUEUE01
-  -t TYPE, --type TYPE  Queue Type classic/quorum
+  -t TYPE, --type TYPE  Queue Type: classic/quorum
   -d DURABLE, --durable DURABLE
-                        queue durable or not
-
+                        Queue durable: true/false
 
 ```
 
