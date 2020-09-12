@@ -10,17 +10,22 @@ import time
 parser = argparse.ArgumentParser(description='RabbitMQ Arguments')
 parser.add_argument("-r", "--rabbithost", type=str, help="RabbitMQ host ex: 127.0.0.1", required=True)
 parser.add_argument("-q", "--queue", type=str, help="Name of RabbitMQ queue ex: QUEUE01", required=True)
+parser.add_argument("-t", "--type", type=str, help="Queue Type classic/quorum", default="classic")
+parser.add_argument("-d", "--durable", type=str, help="queue durable or not", default="true")
 
 # Parse arguments
 args = parser.parse_args()
 Rabbit_host = args.rabbithost
 Queue = args.queue
+Type = args.type
+Durable = args.durable
 
 def main():
   connection = pika.BlockingConnection(
   pika.ConnectionParameters(host=Rabbit_host))
   channel = connection.channel()
-  channel.queue_declare(queue=Queue, durable=True)
+  #channel.queue_declare(queue=Queue, durable=True)
+  channel.queue_declare(queue=Queue, durable=Durable, arguments={'x-queue-type' : Type})
   print(' [ ] Waiting messages. type CTRL+C for exit')
 
   def callback(ch, method, properties, body):
