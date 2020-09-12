@@ -20,6 +20,7 @@ Queue = args.queue
 Type = args.type
 Durable = args.durable
 
+# main function
 def main():
   connection = pika.BlockingConnection(
   pika.ConnectionParameters(host=Rabbit_host))
@@ -28,6 +29,7 @@ def main():
   channel.queue_declare(queue=Queue, durable=Durable, arguments={'x-queue-type' : Type})
   print(' [ ] Waiting messages. type CTRL+C for exit')
 
+  #callback function
   def callback(ch, method, properties, body):
       print(" [°] Received %r" % body.decode())
       time.sleep(body.count(b'.'))
