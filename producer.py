@@ -22,11 +22,9 @@ Type = args.type
 Durable = args.durable
 
 # main function
-
 def main():
   connection = pika.BlockingConnection(pika.ConnectionParameters(host=Rabbit_host))
   channel = connection.channel()
-  #channel.queue_declare(queue=Queue, durable='false')
   channel.queue_declare(queue=Queue, durable=Durable, arguments={'x-queue-type' : Type})
   channel.basic_publish(exchange='', routing_key=Queue, body=Message)
   print("[] Message: \"" +Message+ "\" send to RabbitMQ")
@@ -45,4 +43,3 @@ if __name__ == '__main__':
 
   except :
       print('Something went wrong !')
-
