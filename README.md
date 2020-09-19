@@ -1,6 +1,5 @@
 # python_rabbitmq
-
-Simple scripts that Produce and Consume messages for RabbitMQ for playing with the Rabbit or stress it :)
+Simple scripts that Produce and Consume messages for RabbitMQ
 
 ## Install
 ### Clone
