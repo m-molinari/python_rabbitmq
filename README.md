@@ -18,7 +18,7 @@ You can use scripts passing args by command line :
 
 ### Producer
 ```bash
-usage: producer.py [-h] [-r RABBITHOST] [-m MESSAGE] -q QUEUE [-t TYPE] [-d DURABLE] [-u USERNAME] [-p PASSWORD] [-v VIRTUALHOST]
+usage: producer.py [-h] [-r RABBITHOST] [-m MESSAGE] -q QUEUE [-t TYPE] [-d DURABLE] [-u USERNAME] [-p PASSWORD] [-v VIRTUALHOST] [-n NUMBERS]
 
 RabbitMQ Arguments
 
@@ -39,6 +39,8 @@ optional arguments:
                         password, default is guest
   -v VIRTUALHOST, --virtualhost VIRTUALHOST
                         Virtualhost, default is /
+  -n NUMBERS, --numbers NUMBERS
+                        Loop number of messages
 ```
 ### Consumer
 

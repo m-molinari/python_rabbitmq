@@ -15,6 +15,7 @@ parser.add_argument("-d", "--durable", type=str, help="Queue durable: true/false
 parser.add_argument("-u", "--username", type=str, help="username, default is guest", default="guest")
 parser.add_argument("-p", "--password", type=str, help="password, default is guest", default="guest")
 parser.add_argument("-v", "--virtualhost", type=str, help="Virtualhost,  default is /", default="/")
+parser.add_argument("-n", "--numbers", type=int, help="Loop number of messages", default=1)
 
 # parse arguments
 args = parser.parse_args()
@@ -26,6 +27,7 @@ Durable = args.durable
 Username = args.username
 Password = args.password
 Vhost = args.virtualhost
+Numbers = args.numbers
 
 # credentials
 credentials = pika.PlainCredentials(Username, Password)
@@ -35,8 +37,13 @@ def main():
   connection = pika.BlockingConnection(pika.ConnectionParameters(host=Rabbit_host, port='5672',virtual_host=Vhost, credentials=credentials))
   channel = connection.channel()
   channel.queue_declare(queue=Queue, durable=Durable, arguments={'x-queue-type' : Type})
-  channel.basic_publish(exchange='', routing_key=Queue, body=Message)
-  print("[] Message: \"" +Message+ "\" send to RabbitMQ")
+
+  # message sending cycle
+  for Num in range(1, Numbers+1):
+    Message_Num = Message  + " " + str(Num)
+    channel.basic_publish(exchange='', routing_key=Queue, body=Message_Num)
+    print("[] Message: \""+Message_Num+"" + "\" " "send to RabbitMQ !")
+    
   connection.close()
 
 if __name__ == '__main__':
