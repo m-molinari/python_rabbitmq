@@ -49,7 +49,6 @@ def main():
   connection = pika.BlockingConnection(pika.ConnectionParameters(host=Rabbit_host, port='5672',virtual_host=Vhost, credentials=credentials))
   channel = connection.channel()
   channel.queue_declare(queue=Queue, durable=Durable, arguments={'x-queue-type' : Type})
-
   # message sending cycle
   for Num in range(1, Numbers+1):
     Message_Num = Message  + " " + str(Num)
@@ -66,10 +65,8 @@ if __name__ == '__main__':
   except pika.exceptions.AMQPConnectionError as AMQP_C_E:
       print('Connection Error to RabbitMQ: check authentication data, using "-p" arg for password')
       print(AMQP_C_E)
-
   except pika.exceptions.ChannelClosedByBroker as AMQP_CCB:
       print('Check your queue x-queue-type value anche set classic|quorum by -t or --type argument')
       print(AMQP_CCB)
-
   except :
       print('Something went wrong !')

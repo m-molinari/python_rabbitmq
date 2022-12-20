@@ -49,12 +49,10 @@ def main():
     channel = connection.channel()
     channel.queue_declare(queue=Queue, durable=Durable, arguments={'x-queue-type' : Type})
     print(' [ ] Waiting messages. type CTRL+C for exit')
-  
   except pika.exceptions.ProbableAuthenticationError as PAE:
     print("Connection Error check authentication data, using '-p' arg for password :")
     print(PAE)
     sys.exit(2)
-
   except UnboundLocalError as UE:
     print("Connection error!")
     print(UE)
