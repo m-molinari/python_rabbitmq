@@ -38,9 +38,9 @@ def main():
 
   #callback function
   def callback(ch, method, properties, body):
-      print(" [°] Received %r" % body.decode())
+      print(" [] Received %r" % body.decode())
       time.sleep(body.count(b'.'))
-      print(" [°] Done")
+      print(" [] Done")
       ch.basic_ack(delivery_tag=method.delivery_tag)
 
   channel.basic_qos(prefetch_count=1)
